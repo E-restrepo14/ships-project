@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClaseTorre : MonoBehaviour {
+public class ClaseTorre : NpcClass
+{
+    public float speed;
+    public string counterTag;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Awake()
+    {
+        AttakRange = 12.0f;
+        speed = 6.0f;
+        step = speed * Time.deltaTime;
+        counterTag = "Assassin";
+    }
+
+    private void Update()
+    {
+        Combatir(counterTag);
+    }
+
 }

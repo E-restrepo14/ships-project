@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClaseMele : MonoBehaviour {
+public class ClaseMele : NpcClass
+{
+    public float speed;
+    public string counterTag;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Awake()
+    {
+        AttakRange = 2.0f;
+        speed = 10.0f;
+        step = speed * Time.deltaTime;
+        counterTag = "Gunner";
+    }
+
+    private void Update()
+    {
+        Combatir(counterTag);
+    }
+
 }

@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Target1
+  - Gunner
+  - EnemyGunner
+  - Assassin
+  - EnemyAssassin
+  - Defender
+  - EnemyDefender
   layers:
   - Default
   - TransparentFX
