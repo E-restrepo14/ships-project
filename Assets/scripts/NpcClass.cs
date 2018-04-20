@@ -4,46 +4,69 @@ using UnityEngine;
 
 public class NpcClass : MonoBehaviour
 {
+    public GameObject secondTarget;
     public GameObject target;
-    public Transform VigilanceSpot;
-    public Transform ScapeWay;
+    public Transform vigilanceSpot;
+    public Transform scapeWay;
     public float AttakRange;
     public bool seRetira;
+    public bool isAttacking;
     public float step;
+    public int vida = 4;
 
 
 
 
-    public void Combatir(string counterTag)
+    public void Combatir(string counterTag,string secondTag)
     {
         if (seRetira == false)
         {
-            target = GameObject.FindGameObjectWithTag(counterTag);
-
-            if (target != null)
+            if (vida >= 0)
             {
-                Atacar(target,AttakRange);
+                target = GameObject.FindGameObjectWithTag(counterTag);
+                if (target != null)
+                {
+                    Atacar(target, AttakRange);
+                }
+
+                else
+                {
+                    secondTarget = GameObject.FindGameObjectWithTag(secondTag);
+                    if (secondTarget != null)
+                    {
+                        Atacar(secondTarget, AttakRange);
+                    }
+                    else
+                    {
+                        Formar(vigilanceSpot);
+                    }
+                }
             }
             else
             {
-                Formar(VigilanceSpot);
+                Destroy(gameObject);
             }
         }
         else
         {
+            transform.LookAt(scapeWay);
+
             gameObject.tag = "Untagged";
-            transform.position = Vector3.MoveTowards(transform.position, ScapeWay.position, step * 2);
+            transform.position = Vector3.MoveTowards(transform.position, scapeWay.position,20*Time.deltaTime);
         }
     }
 
     public void Formar(Transform waypoint)
     {
+        transform.LookAt(waypoint);
+
         transform.position = Vector3.MoveTowards(transform.position, waypoint.position, step);
     }
 
     public void Retirarse()
     {
         seRetira = true;
+        Destroy(gameObject, 5);
     }
 
     public void Atacar(GameObject target, float rangeValue)
@@ -51,11 +74,15 @@ public class NpcClass : MonoBehaviour
         float dist = Vector3.Distance(target.transform.position, transform.position);
         if (rangeValue >= dist)
         {
-            print("insertar animacion de atacar");
-            Retirarse();
+            transform.LookAt(target.transform);
+            isAttacking = true;
+            //Retirarse();
         }
         else
         {
+            isAttacking = false;
+            transform.LookAt(target.transform);
+
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
         }
     }

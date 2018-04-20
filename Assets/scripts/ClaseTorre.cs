@@ -6,18 +6,18 @@ public class ClaseTorre : NpcClass
 {
     public float speed;
     public string counterTag;
+    public string secondTag;
 
     void Awake()
     {
         AttakRange = 12.0f;
         speed = 6.0f;
         step = speed * Time.deltaTime;
-        counterTag = "Assassin";
     }
 
     private void Update()
     {
-        Combatir(counterTag);
+        Combatir(counterTag, secondTag);
     }
 
 }
