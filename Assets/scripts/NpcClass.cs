@@ -50,7 +50,7 @@ public class NpcClass : MonoBehaviour
         else
         {
             transform.LookAt(scapeWay);
-
+            Destroy(gameObject, 5);
             gameObject.tag = "Untagged";
             transform.position = Vector3.MoveTowards(transform.position, scapeWay.position,20*Time.deltaTime);
         }
@@ -58,15 +58,20 @@ public class NpcClass : MonoBehaviour
 
     public void Formar(Transform waypoint)
     {
+        float dist = Vector3.Distance(waypoint.position,transform.position);
         transform.LookAt(waypoint);
-
+        isAttacking = false;
         transform.position = Vector3.MoveTowards(transform.position, waypoint.position, step);
+        if (dist <=1)
+        {
+            transform.rotation = Quaternion.Euler(0,0,0);
+        }
     }
 
     public void Retirarse()
     {
         seRetira = true;
-        Destroy(gameObject, 5);
+        isAttacking = false;
     }
 
     public void Atacar(GameObject target, float rangeValue)
@@ -76,11 +81,9 @@ public class NpcClass : MonoBehaviour
         {
             transform.LookAt(target.transform);
             isAttacking = true;
-            //Retirarse();
         }
         else
-        {
-            isAttacking = false;
+        {           
             transform.LookAt(target.transform);
 
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);

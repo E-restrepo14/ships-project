@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4965301682314972}
   - component: {fileID: 114169204131213520}
+  - component: {fileID: 65742322771451182}
   m_Layer: 0
   m_Name: camello
   m_TagString: Untagged
@@ -328,6 +329,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1288487444020794}
   m_Mesh: {fileID: 4300002, guid: 76e1fd78a2a8f29458135eaeb92df854, type: 3}
+--- !u!65 &65742322771451182
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924126294639034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.45, y: 1, z: 3.57}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114169204131213520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,3 +364,5 @@ MonoBehaviour:
   speed: 0
   counterTag: 
   secondTag: 
+  privateShoot: {fileID: 1731769289821318, guid: 1ace730d50ffb0943b49f68d62846ba7,
+    type: 2}

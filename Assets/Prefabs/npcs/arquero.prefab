@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4814396355732206}
   - component: {fileID: 114245522123363112}
+  - component: {fileID: 65240801351398296}
   m_Layer: 0
   m_Name: arquero
   m_TagString: Untagged
@@ -472,6 +473,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1974153284464030}
   m_Mesh: {fileID: 4300000, guid: 0a7394c4f3448aa4babb85783a35864b, type: 3}
+--- !u!65 &65240801351398296
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1446302061214928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.26, y: 1, z: 2.21}
+  m_Center: {x: 0, y: 0.28, z: -0.47}
 --- !u!114 &114245522123363112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,3 +508,5 @@ MonoBehaviour:
   speed: 0
   counterTag: 
   secondTag: 
+  privateShoot: {fileID: 1678396903545840, guid: 3bf2e4c1e7504ab4c8f84944173e002f,
+    type: 2}

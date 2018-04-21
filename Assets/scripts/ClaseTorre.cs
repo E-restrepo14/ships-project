@@ -7,6 +7,10 @@ public class ClaseTorre : NpcClass
     public float speed;
     public string counterTag;
     public string secondTag;
+    [SerializeField]
+    private GameObject privateShoot;
+    float NextTime = 0;
+    int counter = 3;
 
     void Awake()
     {
@@ -18,6 +22,19 @@ public class ClaseTorre : NpcClass
     private void Update()
     {
         Combatir(counterTag, secondTag);
+        if (isAttacking == true)
+        {
+            if (Time.fixedTime > NextTime)
+            {
+                NextTime = Time.fixedTime + counter;
+                GameObject proyectil = Instantiate(privateShoot, transform.position, transform.rotation) as GameObject;
+                proyectil.GetComponent<ClaseProyectil>().targetTag = counterTag;
+                proyectil.GetComponent<ClaseProyectil>().secondTargetTag = secondTag;
+                Destroy(proyectil, 7);
+            }
+
+        }
+
     }
 
 }

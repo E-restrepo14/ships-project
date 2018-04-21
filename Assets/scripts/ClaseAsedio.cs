@@ -8,13 +8,9 @@ public class ClaseAsedio : NpcClass
     public string counterTag;
     public string secondTag;
     [SerializeField]
-    private GameObject Bala;
+    private GameObject privateShoot;
     float NextTime = 0;
     int counter = 5;
-
-    // los camellos atacaran con una particula de electricidad
-    // los lanzaflechas atacarán con una electricidad diferente pero que es a distancia
-    // las catapultas atacarán con una electricidad mas grande que las otras
 
     void Awake()
     {
@@ -26,16 +22,15 @@ public class ClaseAsedio : NpcClass
     private void Update()
     {
         Combatir(counterTag, secondTag);
-
         if (isAttacking == true)
         {
             if (Time.fixedTime > NextTime)
             {
-                NextTime = Time.fixedTime + 3;
-                GameObject proyectil = Instantiate(Bala, transform.position, transform.rotation) as GameObject;
-                proyectil.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 800);
-                Destroy(proyectil,7);
-                counter--;
+                NextTime = Time.fixedTime + counter;
+                GameObject proyectil = Instantiate(privateShoot, transform.position, transform.rotation) as GameObject;
+                proyectil.GetComponent<ClaseProyectil>().targetTag = counterTag;
+                proyectil.GetComponent<ClaseProyectil>().secondTargetTag = secondTag;
+                Destroy(proyectil, 7);
             }
             
         }

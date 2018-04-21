@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4508277013057206}
   - component: {fileID: 114497642374701596}
+  - component: {fileID: 65048119874324768}
+  - component: {fileID: 65971771046261838}
   m_Layer: 0
   m_Name: catapulta
   m_TagString: Untagged
@@ -328,6 +330,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796686232749008}
   m_Mesh: {fileID: 4300002, guid: 6e604203dea50e1468e46e3b726d4b6b, type: 3}
+--- !u!65 &65048119874324768
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057618778812254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.36, y: 1, z: 1.77}
+  m_Center: {x: 0, y: 0.5, z: -0.09}
+--- !u!65 &65971771046261838
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057618778812254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.52, y: 1, z: 1.45}
+  m_Center: {x: 0, y: 0.5, z: 1.57}
 --- !u!114 &114497642374701596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,4 +377,5 @@ MonoBehaviour:
   speed: 0
   counterTag: 
   secondTag: 
-  Bala: {fileID: 1493163216596486, guid: d1acaa7583d40b64f89ccfd445794625, type: 2}
+  privateShoot: {fileID: 1899839003899934, guid: 910c76efbc14633479e3cdc3b292124c,
+    type: 2}
