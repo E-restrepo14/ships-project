@@ -15,6 +15,11 @@ public class InstantiateManager : MonoBehaviour
     [SerializeField]
     private GameObject DefenderShipPrefab;
 
+    public bool needToBuyDefender;
+    public bool needToBuyAssassin;
+    public bool needToBuyGunner;
+
+
     public GameObject assassinClone;
     public GameObject gunnerClone;
     public GameObject defenderClone;
@@ -39,76 +44,100 @@ public class InstantiateManager : MonoBehaviour
 
     public void RetractGunner()
     {
-        gunnerClone.GetComponent<ClaseAsedio>().seRetira = true;
+        if (gunnerClone != null)
+        {
+            gunnerClone.GetComponent<ClaseAsedio>().seRetira = true;
+        }
+        else
+            needToBuyGunner = true;
     }
 
     public void RetractAssassin()
     {
-        assassinClone.GetComponent<ClaseMele>().seRetira = true;
+        if (assassinClone != null)
+        {
+            assassinClone.GetComponent<ClaseMele>().seRetira = true;
+        }
+        else
+            needToBuyAssassin = true;
     }
 
     public void RetractDefender()
     {
-        defenderClone.GetComponent<ClaseTorre>().seRetira = true;
+        if (defenderClone != null)
+        {
+            defenderClone.GetComponent<ClaseTorre>().seRetira = true;
+        }
+        else
+            needToBuyDefender = true;
     }
 
     public void CallGunner(int equipo)
     {
-        gunnerClone = Instantiate(gunnerShipPrefab, transform.position, transform.rotation) as GameObject;
-        gunnerClone.GetComponent<ClaseAsedio>().vigilanceSpot = lineaFrontal;
-        gunnerClone.GetComponent<ClaseAsedio>().scapeWay = scapeWayTransform;
+        if (needToBuyGunner == false)
+        {
+            gunnerClone = Instantiate(gunnerShipPrefab, transform.position, transform.rotation) as GameObject;
+            gunnerClone.GetComponent<ClaseAsedio>().vigilanceSpot = lineaFrontal;
+            gunnerClone.GetComponent<ClaseAsedio>().scapeWay = scapeWayTransform;
 
-        if (equipo == 1)
-        {
-            gunnerClone.tag = "Gunner";
-            gunnerClone.GetComponent<ClaseAsedio>().counterTag = "EnemyDefender";
-            gunnerClone.GetComponent<ClaseAsedio>().secondTag = "Target1";
-        }
-        else
-        {
-            gunnerClone.tag = "EnemyGunner";
-            gunnerClone.GetComponent<ClaseAsedio>().counterTag = "Defender";
-            gunnerClone.GetComponent<ClaseAsedio>().secondTag = "Player";
+            if (equipo == 1)
+            {
+                gunnerClone.tag = "Gunner";
+                gunnerClone.GetComponent<ClaseAsedio>().counterTag = "EnemyDefender";
+                gunnerClone.GetComponent<ClaseAsedio>().secondTag = "Target1";
+            }
+            else
+            {
+                gunnerClone.tag = "EnemyGunner";
+                gunnerClone.GetComponent<ClaseAsedio>().counterTag = "Defender";
+                gunnerClone.GetComponent<ClaseAsedio>().secondTag = "Player";
+            }
         }
     }
 
     public void CallAssassin(int equipo)
     {
-        assassinClone = Instantiate(assassinShipPrefab, transform.position, transform.rotation) as GameObject;
-        assassinClone.GetComponent<ClaseMele>().vigilanceSpot = lineaDefensiva;
-        assassinClone.GetComponent<ClaseMele>().scapeWay = scapeWayTransform;
+        if (needToBuyAssassin == false)
+        {
+            assassinClone = Instantiate(assassinShipPrefab, transform.position, transform.rotation) as GameObject;
+            assassinClone.GetComponent<ClaseMele>().vigilanceSpot = lineaDefensiva;
+            assassinClone.GetComponent<ClaseMele>().scapeWay = scapeWayTransform;
 
-        if (equipo == 1)
-        {
-            assassinClone.tag = "Assassin";
-            assassinClone.GetComponent<ClaseMele>().counterTag = "EnemyGunner";
-            assassinClone.GetComponent<ClaseMele>().secondTag = "Target1";
-        }
-        else
-        {
-            assassinClone.tag = "EnemyAssassin";
-            assassinClone.GetComponent<ClaseMele>().counterTag = "Gunner";
-            assassinClone.GetComponent<ClaseMele>().secondTag = "Player";
+            if (equipo == 1)
+            {
+                assassinClone.tag = "Assassin";
+                assassinClone.GetComponent<ClaseMele>().counterTag = "EnemyGunner";
+                assassinClone.GetComponent<ClaseMele>().secondTag = "Target1";
+            }
+            else
+            {
+                assassinClone.tag = "EnemyAssassin";
+                assassinClone.GetComponent<ClaseMele>().counterTag = "Gunner";
+                assassinClone.GetComponent<ClaseMele>().secondTag = "Player";
+            }
         }
     }
 
     public void CallDefender(int equipo)
     {
-        defenderClone = Instantiate(DefenderShipPrefab, transform.position, transform.rotation) as GameObject;
-        defenderClone.GetComponent<ClaseTorre>().vigilanceSpot = lineaMedia;
-        defenderClone.GetComponent<ClaseTorre>().scapeWay = scapeWayTransform;
+        if (needToBuyDefender == false)
+        {
+            defenderClone = Instantiate(DefenderShipPrefab, transform.position, transform.rotation) as GameObject;
+            defenderClone.GetComponent<ClaseTorre>().vigilanceSpot = lineaMedia;
+            defenderClone.GetComponent<ClaseTorre>().scapeWay = scapeWayTransform;
 
-        if (equipo == 1)
-        {
-            defenderClone.tag = "Defender";
-            defenderClone.GetComponent<ClaseTorre>().counterTag = "EnemyAssassin";
-            defenderClone.GetComponent<ClaseTorre>().secondTag = "Target1";
-        }
-        else
-        {
-            defenderClone.tag = "EnemyDefender";
-            defenderClone.GetComponent<ClaseTorre>().counterTag = "Assassin";
-            defenderClone.GetComponent<ClaseTorre>().secondTag = "Player";
+            if (equipo == 1)
+            {
+                defenderClone.tag = "Defender";
+                defenderClone.GetComponent<ClaseTorre>().counterTag = "EnemyAssassin";
+                defenderClone.GetComponent<ClaseTorre>().secondTag = "Target1";
+            }
+            else
+            {
+                defenderClone.tag = "EnemyDefender";
+                defenderClone.GetComponent<ClaseTorre>().counterTag = "Assassin";
+                defenderClone.GetComponent<ClaseTorre>().secondTag = "Player";
+            }
         }
     }
 

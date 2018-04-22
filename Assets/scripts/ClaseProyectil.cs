@@ -12,13 +12,20 @@ public class ClaseProyectil : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(targetTag) || other.gameObject.CompareTag(secondTargetTag))
+        if (other.gameObject.CompareTag(secondTargetTag))
         {
-            Destroy(other.gameObject);
-            GameObject explosion = Instantiate(explosionParticle, transform.position, transform.rotation) as GameObject;
-            Destroy(explosion, 2);
+            //Destroy(other.gameObject);
+            Audiomanager.Instance.Explotar(gameObject);
             Destroy(gameObject);
         }
+
+        if (other.gameObject.CompareTag(targetTag))
+        {
+            Destroy(other.gameObject);
+            Audiomanager.Instance.Explotar(gameObject);
+            Destroy(gameObject);
+        }
+
     }
 
     private void Update()
