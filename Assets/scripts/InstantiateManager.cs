@@ -15,6 +15,11 @@ public class InstantiateManager : MonoBehaviour
     [SerializeField]
     private GameObject DefenderShipPrefab;
 
+    [SerializeField]
+    private GameObject queenShipPrefab;
+    [SerializeField]
+    private GameObject cuartelShipPrefab;
+
     public bool needToBuyDefender;
     public bool needToBuyAssassin;
     public bool needToBuyGunner;
@@ -23,6 +28,9 @@ public class InstantiateManager : MonoBehaviour
     public GameObject assassinClone;
     public GameObject gunnerClone;
     public GameObject defenderClone;
+
+    public GameObject queenClone;
+    public GameObject cuartelClone;
 
     [SerializeField]
     private Transform lineaDefensiva;
@@ -139,6 +147,33 @@ public class InstantiateManager : MonoBehaviour
                 defenderClone.GetComponent<ClaseTorre>().secondTag = "Player";
             }
         }
+    }
+
+
+    //======================de esta linea en adelante estan los subprocesos para instanciar a un boss final o un semiboss
+
+    public void CallQueen()
+    {
+        queenClone = Instantiate(queenShipPrefab, transform.position, transform.rotation) as GameObject;
+        queenClone.GetComponent<ClaseQueen>().vigilanceSpot = lineaDefensiva;
+        queenClone.GetComponent<ClaseQueen>().scapeWay = scapeWayTransform;
+
+        queenClone.tag = "Target1";
+        queenClone.GetComponent<ClaseQueen>().counterTag = "Gunner";
+        queenClone.GetComponent<ClaseQueen>().secondTag = "Player";
+    }
+
+    public void CallCuartel()
+    {
+        // aun no he creado la clasecuartel. hay que crearla despues ... madre mia podria crear los prefabs de los minienemigos del cuartel... 
+        //que estos sigan siempre al prota pero que puedan ser dañados por balazos y a la vez dañar al prota
+        cuartelClone = Instantiate(cuartelShipPrefab, transform.position, transform.rotation) as GameObject;
+        cuartelClone.GetComponent<ClaseQueen>().vigilanceSpot = lineaMedia;
+        cuartelClone.GetComponent<ClaseQueen>().scapeWay = scapeWayTransform;
+
+        cuartelClone.tag = "Target1";
+        cuartelClone.GetComponent<ClaseQueen>().counterTag = "Gunner";
+        cuartelClone.GetComponent<ClaseQueen>().secondTag = "Player";
     }
 
 }

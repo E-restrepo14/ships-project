@@ -14,21 +14,48 @@ public class Player : MonoBehaviour {
     public bool estaretrocediendo;
     public bool vaaladerecha;
     public bool vaalaizquierda;
+    public bool estaDisparando;
+    [HideInInspector]
     public int life;
     [SerializeField]
     private GameObject Escudo;
-    
+
+
+
+    public string counterTag;
+    public string secondTag;
+    [SerializeField]
+    private GameObject privateShoot;
+    float NextTime = 0;
+    //counter deberia haberse llamado tiempo de carga de disparo.
+    int counter = 5;
 
 
     void Awake()
 	{
 		rgbdy = GetComponent<Rigidbody> ();
 		mCam = Camera.main;
-	}
+        life = 3;
+        counterTag = "EnemyDefender";
+        secondTag = "Target1";
+    }
 
     void Update()
     {
         VerifyPos();
+
+        if (estaDisparando == true)
+        {
+            if (Time.fixedTime > NextTime)
+            {
+                NextTime = Time.fixedTime + counter;
+                GameObject proyectil = Instantiate(privateShoot, transform.position, transform.rotation) as GameObject;
+                proyectil.GetComponent<ClaseProyectilEspecial>().targetTag = counterTag;
+                proyectil.GetComponent<ClaseProyectilEspecial>().safeTag = gameObject.tag;
+                proyectil.GetComponent<ClaseProyectilEspecial>().secondTargetTag = secondTag;
+                Destroy(proyectil, 10);
+            }
+        }
 
         if (estaavanzando == true)
         {
@@ -47,61 +74,76 @@ public class Player : MonoBehaviour {
             transform.Translate(-speed * Time.deltaTime, 0, 0);
         }
 
+     
 
+        // este bloque no se me debe olvidar eliminarlo, ya que solo está acá para poder ser testeado
         float translation = Input.GetAxis("Vertical") * speed;
         float htranslation = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;
         htranslation *= Time.deltaTime;
         transform.Translate(htranslation,0, translation);
-
     }
 
-    public void avanzar()
+    
+
+    public void Avanzar()
     {
         estaavanzando = true;
     }
-    public void retroceder()
+    public void Retroceder()
     {
         estaretrocediendo = true;
     }
-    public void irderecha()
+    public void Irderecha()
     {
         vaaladerecha = true;
     }
-    public void irizquierda()
+    public void Irizquierda()
     {
         vaalaizquierda = true;
     }
+    public void Disparar()
+    {
+        estaDisparando = true;
+    }
 
-    public void noavanzar()
+    public void Noavanzar()
     {
         estaavanzando = false;
     }
-    public void noretroceder()
+    public void Noretroceder()
     {
         estaretrocediendo = false;
     }
-    public void noirderecha()
+    public void Noirderecha()
     {
         vaaladerecha = false;
     }
-    public void noirizquierda()
+    public void Noirizquierda()
     {
         vaalaizquierda = false;
     }
-
-    public IEnumerator Perderunavida(int life)
+    public void Nodisparar()
     {
-        life--;
-        gameObject.tag = "Untagged";
-        Escudo.SetActive(false);
-        yield return new WaitForSeconds(5);
-        gameObject.tag = "Player";
-        Escudo.SetActive(true);
-
+        estaDisparando = false;
     }
 
-   
+    public IEnumerator BajarVida()
+    {
+        if (life >= 1)
+        {
+            life--;
+            UiManager.Instance.OcultarCosa(UiManager.Instance.lifes[life]);
+            Escudo.SetActive(true);
+            yield return new WaitForSeconds(5);
+            Escudo.SetActive(false);
+        }
+        else
+        Destroy(gameObject);
+    }
+
+
+
 
     private void VerifyPos()
     {

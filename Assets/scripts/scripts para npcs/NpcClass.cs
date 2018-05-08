@@ -64,7 +64,7 @@ public class NpcClass : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, waypoint.position, step);
         if (dist <=1)
         {
-            transform.rotation = Quaternion.Euler(0,0,0);
+            transform.rotation = waypoint.rotation;
         }
     }
 

@@ -11,6 +11,7 @@ TagManager:
   - EnemyAssassin
   - Defender
   - EnemyDefender
+  - Shield
   layers:
   - Default
   - TransparentFX
